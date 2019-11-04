@@ -1,0 +1,35 @@
+{
+	"name": "parse-human-relative-time",
+	"description": "Parse human relative time strings like \"next Tuesday 3pm\".",
+	"version": "1.0.0",
+	"main": "index.js",
+	"files": [
+		"index.js",
+		"parser.js",
+		"example.js"
+	],
+	"keywords": [
+		"parse",
+		"human",
+		"relative",
+		"time",
+		"date"
+	],
+	"author": "Jannis R <mail@jannisr.de>",
+	"homepage": "https://github.com/derhuerst/parse-human-relative-time",
+	"repository": "derhuerst/parse-human-relative-time",
+	"bugs": "https://github.com/derhuerst/parse-human-relative-time/issues",
+	"license": "ISC",
+	"engines": {
+		"node": ">=10"
+	},
+	"dependencies": {},
+	"devDependencies": {
+		"syntax-cli": "^0.1.12"
+	},
+	"scripts": {
+		"build": "syntax-cli -g grammar.js -m CLR1 -o parser.js",
+		"test": "node test.js",
+		"prepublishOnly": "npm run build && npm test"
+	}
+}
