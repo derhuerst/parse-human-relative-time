@@ -1,6 +1,8 @@
 'use strict'
 
 const {deepStrictEqual: eql} = require('assert')
+const {toDate, format} = require('date-fns-tz')
+const lex = require('./lex')
 const parse = require('.')
 
 const resetHours = ['setHours', 0]
@@ -8,97 +10,97 @@ const resetMinutes = ['setMinutes', 0]
 const resetSeconds = ['setSeconds', 0]
 const resetMilliseconds = ['setMilliseconds', 0]
 
-eql(parse('12am'), [
+eql(lex('12am'), [
 	['setHours', 0],
 	resetMinutes,
 	resetSeconds,
 	resetMilliseconds
 ])
-eql(parse('12:01am'), [
+eql(lex('12:01am'), [
 	['setHours', 0],
 	['setMinutes', 1],
 	resetSeconds,
 	resetMilliseconds
 ])
-eql(parse('1am'), [
+eql(lex('1am'), [
 	['setHours', 1],
 	resetMinutes,
 	resetSeconds,
 	resetMilliseconds
 ])
-eql(parse('11:59am'), [
+eql(lex('11:59am'), [
 	['setHours', 11],
 	['setMinutes', 59],
 	resetSeconds,
 	resetMilliseconds
 ])
 
-eql(parse('noon'), [
+eql(lex('noon'), [
 	['setHours', 12],
 	resetMinutes,
 	resetSeconds,
 	resetMilliseconds
 ])
-eql(parse('12pm'), [
+eql(lex('12pm'), [
 	['setHours', 12],
 	resetMinutes,
 	resetSeconds,
 	resetMilliseconds
 ])
 
-eql(parse('12:01pm'), [
+eql(lex('12:01pm'), [
 	['setHours', 12],
 	['setMinutes', 1],
 	resetSeconds,
 	resetMilliseconds
 ])
-eql(parse('11:59pm'), [
+eql(lex('11:59pm'), [
 	['setHours', 23],
 	['setMinutes', 59],
 	resetSeconds,
 	resetMilliseconds
 ])
 
-eql(parse('midnight'), [
+eql(lex('midnight'), [
 	['setHours', 0],
 	resetMinutes,
 	resetSeconds,
 	resetMilliseconds
 ])
 
-eql(parse('tomorrow at 7'), [
+eql(lex('tomorrow at 7'), [
 	['addDays', 1],
 	['setHours', 7],
 	resetMinutes,
 	resetSeconds,
 	resetMilliseconds
 ])
-eql(parse('yesterday at 7'), [
+eql(lex('yesterday at 7'), [
 	['subDays', 1],
 	['setHours', 7],
 	resetMinutes,
 	resetSeconds,
 	resetMilliseconds
 ])
-eql(parse('today at 8am'), [
+eql(lex('today at 8am'), [
 	['setHours', 8],
 	resetMinutes,
 	resetSeconds,
 	resetMilliseconds
 ])
-eql(parse('now'), [])
-eql(parse('3 days ago'), [
+eql(lex('now'), [])
+eql(lex('3 days ago'), [
 	['subDays', 3]
 ])
-eql(parse('a week ago'), [
+eql(lex('a week ago'), [
 	['subWeeks', 1]
 ])
-eql(parse('2 weeks ago'), [
+eql(lex('2 weeks ago'), [
 	['subWeeks', 2]
 ])
 
 // todo: `aug 25 2015 5pm`
-eql(parse('aug 25th 2015 5pm'), [
+eql(lex('aug 25th 2015 5pm'), [
 	['setDate', 25],
 	['setMonth', 7], // 7 = August
 	['setYear', 2015],
@@ -107,70 +109,85 @@ eql(parse('aug 25th 2015 5pm'), [
 	resetSeconds,
 	resetMilliseconds
 ])
-eql(parse('august 25th 2015'), [
+eql(lex('august 25th 2015'), [
 	['setDate', 25],
 	['setMonth', 7], // 7 = August
 	['setYear', 2015]
 ])
-eql(parse('1st of Jan 2020'), [
+eql(lex('1st of Jan 2020'), [
 	['setDate', 1],
 	['setMonth', 0], // 0 = January
 	['setYear', 2020]
 ])
-eql(parse('30th of August'), [
+eql(lex('30th of August'), [
 	['setDate', 30],
 	['setMonth', 7] // 7 = August
 ])
 
-eql(parse('sunday'), [
+eql(lex('sunday'), [
 	['setDay', 0] // 0 = Sunday
 ])
-eql(parse('this friday'), [
+eql(lex('this friday'), [
 	['setDay', 5] // 5 = Friday
 ])
-eql(parse('next friday'), [
+eql(lex('next friday'), [
 	['startOfWeek'],
 	['addWeeks', 1],
 	['setDay', 5] // 5 = Friday
 ])
-eql(parse('last friday'), [
+eql(lex('last friday'), [
 	['startOfWeek'],
 	['subWeeks', 1],
 	['setDay', 5] // 5 = Friday
 ])
 
-eql(parse('in 12 minutes'), [
+eql(lex('in 12 minutes'), [
 	['addMinutes', 12]
 ])
-eql(parse('in 2 hours'), [
+eql(lex('in 2 hours'), [
 	['addHours', 2]
 ])
-eql(parse('in 31 hours'), [
+eql(lex('in 31 hours'), [
 	['addHours', 31]
 ])
-eql(parse('in 20 hours 40 minutes'), [
+eql(lex('in 20 hours 40 minutes'), [
 	['addHours', 20],
 	['addMinutes', 40]
 ])
-eql(parse('in 20 hours and 40 minutes'), [
+eql(lex('in 20 hours and 40 minutes'), [
 	['addHours', 20],
 	['addMinutes', 40]
 ])
-eql(parse('in 20.2h'), [
+eql(lex('in 20.2h'), [
 	['addHours', 20.2]
 ])
-eql(parse('in 5 weeks'), [
+eql(lex('in 5 weeks'), [
 	['addWeeks', 5]
 ])
-eql(parse('in 2 years'), [
+eql(lex('in 2 years'), [
 	['addYears', 2]
 ])
-eql(parse('in 2 years and 5 weeks'), [
+eql(lex('in 2 years and 5 weeks'), [
 	['addYears', 2],
 	['addWeeks', 5]
 ])
-eql(parse('in 1.5 weeks'), [
+eql(lex('in 1.5 weeks'), [
 	['addWeeks', 1.5]
 ])
+
+
+// 01:00 in Europe/Berlin: switch non-DST -> DST
+//   require('luxon')
+//   .DateTime
+//   .fromISO('2019-03-31T01:59+01:00')
+//   .setZone('Europe/Berlin')
+//   .plus({minutes: 2})
+//   .toISO()
+//   -> 2019-03-31T03:01+02:00
+const timeZone = 'Europe/Berlin'
+const d = toDate('2019-03-31T01:59+01:00', {timeZone})
+const d2 = parse('in 2 minutes', d)
+eql(format(d2, 'HH:mm zz', {timeZone}), '03:01 GMT+2')
+
 
 console.info('Tests successful. ✔︎')

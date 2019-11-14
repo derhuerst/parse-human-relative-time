@@ -6,6 +6,7 @@
 	"files": [
 		"index.js",
 		"parser.js",
+		"lex.js",
 		"example.js"
 	],
 	"keywords": [
@@ -23,8 +24,11 @@
 	"engines": {
 		"node": ">=10"
 	},
-	"dependencies": {},
+	"dependencies": {
+		"date-fns": "^2.7.0"
+	},
 	"devDependencies": {
+		"date-fns-tz": "^1.0.8",
 		"syntax-cli": "^0.1.12"
 	},
 	"scripts": {
