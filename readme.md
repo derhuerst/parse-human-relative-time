@@ -20,7 +20,7 @@ parseHumanRelativeTime('in 2 minutes', dt)
 ![ISC-licensed](https://img.shields.io/github/license/derhuerst/parse-human-relative-time.svg)
 ![minimum Node.js version](https://img.shields.io/node/v/parse-human-relative-time.svg)
 [![chat with me on Gitter](https://img.shields.io/badge/chat%20with%20me-on%20gitter-512e92.svg)](https://gitter.im/derhuerst)
-[![support me on Patreon](https://img.shields.io/badge/support%20me-on%20patreon-fa7664.svg)](https://patreon.com/derhuerst)
+[![support me on Patreon](https://img.shields.io/badge/support%20me-on%20patreon-fa7664.svg)](https://patreon.com/derhuerst) [![Greenkeeper badge](https://badges.greenkeeper.io/derhuerst/parse-human-relative-time.svg)](https://greenkeeper.io/)
 
 
 ## Installation
