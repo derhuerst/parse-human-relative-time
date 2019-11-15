@@ -1,9 +1,10 @@
 'use strict'
 
 const {format} = require('date-fns-tz')
+const dateFns = require('date-fns')
 const {DateTime} = require('luxon')
-const parseWithDateFns = require('.')
-const parseWithLuxon = require('./luxon')
+const parseWithDateFns = require('.')(dateFns)
+const parseWithLuxon = require('./luxon')(DateTime)
 
 // Europe/Berlin switched to DST at 31st of March at 2am.
 const withoutDST = '2019-03-31T01:59+01:00'

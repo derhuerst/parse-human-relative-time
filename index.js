@@ -1,23 +1,26 @@
 'use strict'
 
 const lex = require('./lex')
-const dateFns = require('date-fns')
 
-const parseHumanRelativeTime = (str, now = new Date()) => {
-	const instructions = lex(str)
-	let res = now
-	for (const [cmd, ...args] of instructions) {
-		if ('function' !== typeof dateFns[cmd]) {
-			const err = new Error(`date-fns.${cmd} is not a function`)
-			err.cmd = cmd
-			err.arguments = args
-			err.instructions = instructions
-			throw err
+const createParse = (dateFns) => {
+	const parseHumanRelativeTime = (str, now = new Date()) => {
+		const instructions = lex(str)
+		let res = now
+		for (const [cmd, ...args] of instructions) {
+			if ('function' !== typeof dateFns[cmd]) {
+				const err = new Error(`date-fns.${cmd} is not a function`)
+				err.cmd = cmd
+				err.arguments = args
+				err.instructions = instructions
+				throw err
+			}
+
+			res = dateFns[cmd](res, ...args)
 		}
-
-		res = dateFns[cmd](res, ...args)
+		return res
 	}
-	return res
+
+	return parseHumanRelativeTime
 }
 
-module.exports = parseHumanRelativeTime
+module.exports = createParse

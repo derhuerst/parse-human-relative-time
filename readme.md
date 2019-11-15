@@ -3,8 +3,9 @@
 Yet another package to **parse human relative time strings like "next Tuesday 3pm" and apply it to a `Date`**.
 
 ```js
+const dateFns = require('date-fns')
+const parseHumanRelative = require('parse-human-relative-time')(dateFns)
 const {format} = require('date-fns-tz')
-const parseHumanRelative = require('parse-human-relative-time')
 
 // Europe/Berlin switched to DST at 31st of March at 2am.
 const withoutDST = new Date('2019-03-31T01:59+01:00')
@@ -31,7 +32,8 @@ npm install parse-human-relative-time
 ## Usage
 
 ```js
-const parseHumanRelativeTime = require('parse-human-relative-time')
+const dateFns = require('date-fns')
+const parseHumanRelativeTime = require('parse-human-relative-time')(dateFns)
 const lexHumanRelativeTime = require('parse-human-relative-time/lex')
 
 const dt = new Date('2019-11-11T11:11Z')
@@ -56,7 +58,8 @@ lexHumanRelativeTime('next tuesday 5pm')
 ### [Luxon](https://moment.github.io/luxon/) integration
 
 ```js
-const parseHumanRelativeTime = require('parse-human-relative-time/luxon')
+const {DateTime} = require('luxon')
+const parseHumanRelativeTime = require('parse-human-relative-time/luxon')(DateTime)
 
 const dt = DateTime.fromISO('2019-11-11T11:11Z', {zone: 'utc'})
 parseHumanRelativeTime('next tuesday 5pm', dt)

@@ -2,10 +2,11 @@
 
 const {deepStrictEqual: eql} = require('assert')
 const {toDate} = require('date-fns-tz')
+const dateFns = require('date-fns')
 const {DateTime} = require('luxon')
 const lex = require('./lex')
-const parse = require('.')
-const parseWithLuxon = require('./luxon')
+const parse = require('.')(dateFns)
+const parseWithLuxon = require('./luxon')(DateTime)
 
 const resetHours = ['setHours', 0]
 const resetMinutes = ['setMinutes', 0]

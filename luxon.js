@@ -1,7 +1,6 @@
 'use strict'
 
 const lex = require('./lex')
-const {DateTime} = require('luxon')
 
 const cmds = new Map([
 	['addMilliseconds', (dt, ms) => dt.plus({milliseconds: ms})],
@@ -35,21 +34,25 @@ const cmds = new Map([
 	['endOfWeek', dt => dt.endOf('week')]
 ])
 
-const parseHumanRelativeTime = (str, now = DateTime.local()) => {
-	const instructions = lex(str)
-	let res = now
-	for (const [cmd, ...args] of instructions) {
-		if (!cmds.has(cmd)) {
-			const err = new Error(cmd + ' is not supported')
-			err.cmd = cmd
-			err.arguments = args
-			err.instructions = instructions
-			throw err
-		}
+const createParse = (DateTime) => {
+	const parseHumanRelativeTime = (str, now = DateTime.local()) => {
+		const instructions = lex(str)
+		let res = now
+		for (const [cmd, ...args] of instructions) {
+			if (!cmds.has(cmd)) {
+				const err = new Error(cmd + ' is not supported')
+				err.cmd = cmd
+				err.arguments = args
+				err.instructions = instructions
+				throw err
+			}
 
-		res = cmds.get(cmd)(res, ...args)
+			res = cmds.get(cmd)(res, ...args)
+		}
+		return res
 	}
-	return res
+
+	return parseHumanRelativeTime
 }
 
-module.exports = parseHumanRelativeTime
+module.exports = createParse

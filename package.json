@@ -25,12 +25,14 @@
 	"engines": {
 		"node": ">=10"
 	},
-	"dependencies": {
+	"peerDependencies": {
 		"date-fns": "^2.7.0",
 		"luxon": "^1.21.1"
 	},
 	"devDependencies": {
+		"date-fns": "^2.7.0",
 		"date-fns-tz": "^1.0.8",
+		"luxon": "^1.21.1",
 		"syntax-cli": "^0.1.12"
 	},
 	"scripts": {
