@@ -29,10 +29,11 @@
 		'thursday',
 		'friday',
 		'saturday'
-	].flatMap((m, i) => [
+	].reduce((acc, m, i) => [
+		...acc,
 		[m, i],
 		[m.slice(0, 3), i]
-	])
+	], [])
 
 	const months = [
 		'january',
@@ -47,10 +48,11 @@
 		'october',
 		'november',
 		'december'
-	].flatMap((m, i) => [
+	].reduce((acc, m, i) => [
+		...acc,
 		[m, i],
 		[m.slice(0, 3), i]
-	])
+	], [])
 
 	return {
 		lex: {

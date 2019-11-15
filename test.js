@@ -1,7 +1,7 @@
 'use strict'
 
 const {deepStrictEqual: eql} = require('assert')
-const {toDate, format} = require('date-fns-tz')
+const {toDate} = require('date-fns-tz')
 const lex = require('./lex')
 const parse = require('.')
 
@@ -187,7 +187,7 @@ eql(lex('in 1.5 weeks'), [
 const timeZone = 'Europe/Berlin'
 const d = toDate('2019-03-31T01:59+01:00', {timeZone})
 const d2 = parse('in 2 minutes', d)
-eql(format(d2, 'HH:mm zz', {timeZone}), '03:01 GMT+2')
+eql(d2.toISOString(), '2019-03-31T01:01:00.000Z')
 
 
 console.info('Tests successful. ✔︎')

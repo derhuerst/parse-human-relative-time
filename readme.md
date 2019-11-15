@@ -1,6 +1,6 @@
 # parse-human-relative-time
 
-Yet another package to **parse human relative time strings like "next Tuesday 3pm" and apply it to a `Date`.**.
+Yet another package to **parse human relative time strings like "next Tuesday 3pm" and apply it to a `Date`**.
 
 ```js
 const {format} = require('date-fns-tz')
