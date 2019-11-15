@@ -53,6 +53,19 @@ lexHumanRelativeTime('next tuesday 5pm')
 ]
 ```
 
+### [Luxon](https://moment.github.io/luxon/) integration
+
+```js
+const parseHumanRelativeTime = require('parse-human-relative-time/luxon')
+
+const dt = DateTime.fromISO('2019-11-11T11:11Z', {zone: 'utc'})
+parseHumanRelativeTime('next tuesday 5pm', dt)
+.toISO({suppressSeconds: true, suppressMilliseconds: true})
+// 2019-11-19T17:00Z
+```
+
+Note that [Luxon currently always follows ISO weekdays (`0` = Monday) instead of the locale](https://github.com/moment/luxon/issues/373).
+
 
 ## Why yet another package?
 

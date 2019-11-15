@@ -5,6 +5,7 @@
 	"main": "index.js",
 	"files": [
 		"index.js",
+		"luxon.js",
 		"parser.js",
 		"lex.js",
 		"example.js"
@@ -25,7 +26,8 @@
 		"node": ">=10"
 	},
 	"dependencies": {
-		"date-fns": "^2.7.0"
+		"date-fns": "^2.7.0",
+		"luxon": "^1.21.1"
 	},
 	"devDependencies": {
 		"date-fns-tz": "^1.0.8",

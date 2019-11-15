@@ -1,12 +1,19 @@
 'use strict'
 
 const {format} = require('date-fns-tz')
-const parseHumanRelative = require('.')
+const {DateTime} = require('luxon')
+const parseWithDateFns = require('.')
+const parseWithLuxon = require('./luxon')
 
 // Europe/Berlin switched to DST at 31st of March at 2am.
-const withoutDST = new Date('2019-03-31T01:59+01:00')
+const withoutDST = '2019-03-31T01:59+01:00'
+const timeZone = 'Europe/Berlin'
+const rel = 'in 2 minutes'
 
-const withDST = parseHumanRelative('in 2 minutes', withoutDST)
+const withDST1 = parseWithDateFns(rel, new Date(withoutDST))
+console.log(format(withDST1, 'HH:mm zz', {timeZone: 'Europe/Berlin'}))
+// 03:01 GMT+2
 
-console.log(format(withDST, 'HH:mm zz', {timeZone: 'Europe/Berlin'}))
+const withDST2 = parseWithLuxon(rel, DateTime.fromISO(withoutDST).setZone(timeZone))
+console.log(withDST2.toFormat('HH:mm ZZZZ'))
 // 03:01 GMT+2
