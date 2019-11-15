@@ -36,7 +36,7 @@ const lexHumanRelativeTime = require('parse-human-relative-time/lex')
 
 const dt = new Date('2019-11-11T11:11Z')
 parseHumanRelativeTime('next tuesday 5pm', dt)
-'2019-11-19T17:00Z'
+// 2019-11-19T17:00Z
 
 lexHumanRelativeTime('next tuesday 5pm')
 [
