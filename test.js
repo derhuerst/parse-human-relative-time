@@ -5,8 +5,8 @@ const {toDate} = require('date-fns-tz')
 const dateFns = require('date-fns')
 const {DateTime} = require('luxon')
 const lex = require('./lex')
-const parse = require('.')(dateFns)
-const parseWithLuxon = require('./luxon')(DateTime)
+const parse = require('./date-fns')(dateFns)
+const parseWithLuxon = require('.')(DateTime)
 
 const resetHours = ['setHours', 0]
 const resetMinutes = ['setMinutes', 0]

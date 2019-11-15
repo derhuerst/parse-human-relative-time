@@ -5,7 +5,7 @@
 	"main": "index.js",
 	"files": [
 		"index.js",
-		"luxon.js",
+		"date-fns.js",
 		"parser.js",
 		"lex.js",
 		"example.js"

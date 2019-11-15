@@ -1,18 +1,19 @@
 # parse-human-relative-time
 
-Yet another package to **parse human relative time strings like "next Tuesday 3pm" and apply it to a `Date`**.
+Yet another package to **parse human relative time strings like "next Tuesday 3pm" and apply it to a date+time**.
 
 ```js
-const dateFns = require('date-fns')
-const parseHumanRelative = require('parse-human-relative-time')(dateFns)
-const {format} = require('date-fns-tz')
+const {DateTime} = require('luxon')
+const parseHumanRelativeTime = require('parse-human-relative-time/luxon')(DateTime)
 
 // Europe/Berlin switched to DST at 31st of March at 2am.
-const withoutDST = new Date('2019-03-31T01:59+01:00')
-const withDST = parseHumanRelative('in 2 minutes', withoutDST)
-format(withDST, 'HH:mm zz', {timeZone: 'Europe/Berlin'})
-// 03:01 GMT+2
-````
+const tz = 'Europe/Berlin'
+const dt = DateTime.fromISO('2019-03-31T01:59+01:00').setZone(tz)
+
+parseHumanRelativeTime('in 2 minutes', dt)
+.toISO({suppressSeconds: true, suppressMilliseconds: true})
+// 2019-03-31T03:01+02:00
+```
 
 [![npm version](https://img.shields.io/npm/v/parse-human-relative-time.svg)](https://www.npmjs.com/package/parse-human-relative-time)
 [![build status](https://api.travis-ci.org/derhuerst/parse-human-relative-time.svg?branch=master)](https://travis-ci.org/derhuerst/parse-human-relative-time)
@@ -31,16 +32,33 @@ npm install parse-human-relative-time
 
 ## Usage
 
+When using `luxon`, note that [it currently always follows ISO weekdays (`0` = Monday) instead of the locale](https://github.com/moment/luxon/issues/373).
+
+### [`date-fns`](https://date-fns.org) integration
+
 ```js
 const dateFns = require('date-fns')
-const parseHumanRelativeTime = require('parse-human-relative-time')(dateFns)
+const parseHumanRelative = require('parse-human-relative-time/date-fns')(dateFns)
+const {format} = require('date-fns-tz')
+
+// Europe/Berlin switched to DST at 31st of March at 2am.
+const withoutDST = new Date('2019-03-31T01:59+01:00')
+const timeZone = 'Europe/Berlin'
+
+const withDST = parseHumanRelative('in 2 minutes', withoutDST)
+format(withDST, 'HH:mm zz', {timeZone})
+// 03:01 GMT+2
+````
+
+### Lexing into instructions
+
+```js
 const lexHumanRelativeTime = require('parse-human-relative-time/lex')
 
-const dt = new Date('2019-11-11T11:11Z')
-parseHumanRelativeTime('next tuesday 5pm', dt)
-// 2019-11-19T17:00Z
-
 lexHumanRelativeTime('next tuesday 5pm')
+```
+
+```js
 [
 	// next tuesday
 	['startOfWeek'],
@@ -54,20 +72,6 @@ lexHumanRelativeTime('next tuesday 5pm')
 	['setMilliseconds', 0]
 ]
 ```
-
-### [Luxon](https://moment.github.io/luxon/) integration
-
-```js
-const {DateTime} = require('luxon')
-const parseHumanRelativeTime = require('parse-human-relative-time/luxon')(DateTime)
-
-const dt = DateTime.fromISO('2019-11-11T11:11Z', {zone: 'utc'})
-parseHumanRelativeTime('next tuesday 5pm', dt)
-.toISO({suppressSeconds: true, suppressMilliseconds: true})
-// 2019-11-19T17:00Z
-```
-
-Note that [Luxon currently always follows ISO weekdays (`0` = Monday) instead of the locale](https://github.com/moment/luxon/issues/373).
 
 
 ## Why yet another package?
