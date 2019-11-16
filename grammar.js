@@ -84,6 +84,8 @@
 				[b('weeks?'),		`return 'WEEK'`],
 				[b('months?'),		`return 'MONTH'`],
 				[b('years?'),		`return 'YEAR'`],
+				[b('sec'),			`return 'SECOND'`],
+				[b('min'),			`return 'MINUTE'`],
 				[b('s'),			`return 'SECOND'`],
 				[b('m'),			`return 'MINUTE'`],
 				[b('h'),			`return 'HOUR'`],
