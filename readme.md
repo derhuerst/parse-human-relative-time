@@ -4,7 +4,7 @@ Yet another package to **parse human relative time strings like "next Tuesday 3p
 
 ```js
 const {DateTime} = require('luxon')
-const parseHumanRelativeTime = require('parse-human-relative-time/luxon')(DateTime)
+const parseHumanRelativeTime = require('parse-human-relative-time')(DateTime)
 
 // Europe/Berlin switched to DST at 31st of March at 2am.
 const tz = 'Europe/Berlin'
