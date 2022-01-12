@@ -32,12 +32,14 @@
 	"devDependencies": {
 		"date-fns": "^2.7.0",
 		"date-fns-tz": "^1.0.8",
+		"eslint": "^8.6.0",
 		"luxon": "^1.21.1",
 		"syntax-cli": "^0.1.12"
 	},
 	"scripts": {
+		"lint": "eslint --ignore-path .gitignore .",
 		"build": "syntax-cli -g grammar.js -m CLR1 -o parser.js",
 		"test": "node test.js",
-		"prepublishOnly": "npm run build && npm test"
+		"prepublishOnly": "npm run lint && npm run build && npm test"
 	}
 }
