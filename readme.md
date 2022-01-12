@@ -1,6 +1,12 @@
 # parse-human-relative-time
 
-Yet another package to **parse human relative time strings like "next Tuesday 3pm" and apply it to a date+time**.
+Yet another package to **parse human relative time strings like "next Tuesday 3pm" and apply them to a date+time**.
+
+[![npm version](https://img.shields.io/npm/v/parse-human-relative-time.svg)](https://www.npmjs.com/package/parse-human-relative-time)
+![ISC-licensed](https://img.shields.io/github/license/derhuerst/parse-human-relative-time.svg)
+![minimum Node.js version](https://img.shields.io/node/v/parse-human-relative-time.svg)
+[![support me via GitHub Sponsors](https://img.shields.io/badge/support%20me-donate-fa7664.svg)](https://github.com/sponsors/derhuerst)
+[![chat with me on Twitter](https://img.shields.io/badge/chat%20with%20me-on%20Twitter-1da1f2.svg)](https://twitter.com/derhuerst)
 
 ```js
 const {DateTime} = require('luxon')
@@ -14,12 +20,6 @@ parseHumanRelativeTime('in 2 minutes', dt)
 .toISO({suppressSeconds: true, suppressMilliseconds: true})
 // 2019-03-31T03:01+02:00
 ```
-
-[![npm version](https://img.shields.io/npm/v/parse-human-relative-time.svg)](https://www.npmjs.com/package/parse-human-relative-time)
-![ISC-licensed](https://img.shields.io/github/license/derhuerst/parse-human-relative-time.svg)
-![minimum Node.js version](https://img.shields.io/node/v/parse-human-relative-time.svg)
-[![chat with me on Gitter](https://img.shields.io/badge/chat%20with%20me-on%20gitter-512e92.svg)](https://gitter.im/derhuerst)
-[![support me on Patreon](https://img.shields.io/badge/support%20me-on%20patreon-fa7664.svg)](https://patreon.com/derhuerst)
 
 
 ## Installation
@@ -83,7 +83,7 @@ lexHumanRelativeTime('next tuesday 5pm')
 
 Some actually do it right, but don't support a lot of expressions, e.g. [`relative-time-expression`](https://github.com/Frezc/relative-time-expression).
 
-This package **parses** a human relative time string (e.g. `next Tuesday 2pm`) **into a set of manipulation *instructions* and applies them to a `Date`** using [`date-fns`](https://date-fns.org). It therefore separates parsing and manipulation, leaving complex topic of time zones up to date/time libraries.
+This package **parses** a human relative time string (e.g. `next Tuesday 2pm`) **into a set of manipulation *instructions* and applies them to a `Date`** using [Luxon](https://moment.github.io/luxon/) or [`date-fns`](https://date-fns.org). It therefore separates parsing and manipulation, letting the date/time lib handle the complex topic of time zones.
 
 
 ## Contributing
