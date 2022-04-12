@@ -16,18 +16,18 @@ const parseHumanRelativeTime = require('parse-human-relative-time')(DateTime)
 const tz = 'Europe/Berlin'
 const dt = DateTime.fromISO('2019-03-31T01:59+01:00').setZone(tz)
 
-parseHumanRelativeTime('in 2 minutes', dt)
-.toISO({suppressSeconds: true, suppressMilliseconds: true})
+parseHumanRelativeTime('in 2 minutes', dt).toISO({
+	suppressSeconds: true,
+	suppressMilliseconds: true
+})
 // 2019-03-31T03:01+02:00
 ```
-
 
 ## Installation
 
 ```shell
 npm install parse-human-relative-time
 ```
-
 
 ## Usage
 
@@ -37,7 +37,9 @@ When using `luxon`, note that [it currently always follows ISO weekdays (`0` = M
 
 ```js
 const dateFns = require('date-fns')
-const parseHumanRelative = require('parse-human-relative-time/date-fns')(dateFns)
+const parseHumanRelative = require('parse-human-relative-time/date-fns')(
+	dateFns
+)
 const {format} = require('date-fns-tz')
 
 // Europe/Berlin switched to DST at 31st of March at 2am.
@@ -47,7 +49,18 @@ const timeZone = 'Europe/Berlin'
 const withDST = parseHumanRelative('in 2 minutes', withoutDST)
 format(withDST, 'HH:mm zz', {timeZone})
 // 03:01 GMT+2
-````
+```
+
+#### weekStartsOn
+
+For date-fns we have an extra parameter for weekStartsOn, e.g.:
+
+````js
+parseHumanRelative('last week', new Date(), { weekStartsOn = 1})
+// would return last monday
+```
+
+Default is 0 = Sunday.
 
 ### Lexing into instructions
 
@@ -58,7 +71,7 @@ lexHumanRelativeTime('next tuesday 5pm')
 ```
 
 ```js
-[
+;[
 	// next tuesday
 	['startOfWeek'],
 	['addWeeks', 1],
@@ -72,20 +85,19 @@ lexHumanRelativeTime('next tuesday 5pm')
 ]
 ```
 
-
 ## Why yet another package?
 
 **Other packages don't handle time zones correctly**, because they
 
-- mess up timezones (e.g. [`parse-messy-time`](https://github.com/substack/parse-messy-time)),
-- parse to relative milliseconds, in some [DST](https://en.wikipedia.org/wiki/Daylight_saving_time) cases (e.g. [`parse-relative-time`](https://github.com/fczbkk/parse-relative-time) & [`timestring`](https://github.com/mike182uk/timestring)),
-- require or even monkey-patch a specific date/time library (e.g. [`relative-time-parser`](https://github.com/cmaurer/relative.time.parser)).
+-   mess up timezones (e.g. [`parse-messy-time`](https://github.com/substack/parse-messy-time)),
+-   parse to relative milliseconds, in some [DST](https://en.wikipedia.org/wiki/Daylight_saving_time) cases (e.g. [`parse-relative-time`](https://github.com/fczbkk/parse-relative-time) & [`timestring`](https://github.com/mike182uk/timestring)),
+-   require or even monkey-patch a specific date/time library (e.g. [`relative-time-parser`](https://github.com/cmaurer/relative.time.parser)).
 
 Some actually do it right, but don't support a lot of expressions, e.g. [`relative-time-expression`](https://github.com/Frezc/relative-time-expression).
 
-This package **parses** a human relative time string (e.g. `next Tuesday 2pm`) **into a set of manipulation *instructions* and applies them to a `Date`** using [Luxon](https://moment.github.io/luxon/) or [`date-fns`](https://date-fns.org). It therefore separates parsing and manipulation, letting the date/time lib handle the complex topic of time zones.
-
+This package **parses** a human relative time string (e.g. `next Tuesday 2pm`) **into a set of manipulation _instructions_ and applies them to a `Date`** using [Luxon](https://moment.github.io/luxon/) or [`date-fns`](https://date-fns.org). It therefore separates parsing and manipulation, letting the date/time lib handle the complex topic of time zones.
 
 ## Contributing
 
 If you have a question or need support using `parse-human-relative-time`, please double-check your code and setup first. If you think you have found a bug or want to propose a feature, refer to [the issues page](https://github.com/derhuerst/parse-human-relative-time/issues).
+````

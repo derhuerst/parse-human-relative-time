@@ -31,10 +31,11 @@ const cmds = new Map([
 	['setYear', (dt, y) => dt.set({year: y})],
 
 	['startOfWeek', dt => dt.startOf('week')],
+	['startOfMonth', dt => dt.startOf('month')],
 	['endOfWeek', dt => dt.endOf('week')]
 ])
 
-const createParse = (DateTime) => {
+const createParse = DateTime => {
 	const parseHumanRelativeTime = (str, now = DateTime.local()) => {
 		const instructions = lex(str)
 		let res = now

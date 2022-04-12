@@ -10,3 +10,5 @@ pnpm-debug.log
 /shrinkwrap.yaml
 
 /parser.js
+
+.vscode

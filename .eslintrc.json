@@ -1,5 +1,9 @@
 {
-	"extends": "eslint:recommended",
+	"extends": [
+		"eslint:recommended",
+		"plugin:prettier/recommended",
+		"prettier"
+	],
 	"env": {
 		"commonjs": true,
 		"es6": true,
@@ -8,9 +12,7 @@
 	"parserOptions": {
 		"ecmaVersion": 2018
 	},
-	"ignorePatterns": [
-		"node_modules"
-	],
+	"ignorePatterns": ["node_modules"],
 	"rules": {
 		"no-unused-vars": "off"
 	}

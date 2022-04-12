@@ -2,8 +2,12 @@
 
 const lex = require('./lex')
 
-const createParse = (dateFns) => {
-	const parseHumanRelativeTime = (str, now = new Date()) => {
+const createParse = dateFns => {
+	const parseHumanRelativeTime = (
+		str,
+		now = new Date(),
+		opts = {weekStartsOn: 0}
+	) => {
 		const instructions = lex(str)
 		let res = now
 		for (const [cmd, ...args] of instructions) {
@@ -15,7 +19,7 @@ const createParse = (dateFns) => {
 				throw err
 			}
 
-			res = dateFns[cmd](res, ...args)
+			res = dateFns[cmd](res, ...args, opts)
 		}
 		return res
 	}

@@ -267,7 +267,7 @@
 				`$$ = [['startOfWeek'], ['addWeeks', 1], ['setDay', $2]]`
 			], [
 				'LAST month',
-				`$$ = [['startOfMonth'], ['subMonths', 1], ['setMonth', $2]]`
+				`$$ = [['startOfMonth'], ['subDays', 1], ['startOfMonth']]`
 			], [
 				'LAST day_of_week',
 				`$$ = [['startOfWeek'], ['subWeeks', 1], ['setDay', $2]]`
