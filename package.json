@@ -1,7 +1,7 @@
 {
 	"name": "parse-human-relative-time",
 	"description": "Parse human relative time strings like \"next Tuesday 3pm\".",
-	"version": "3.0.0",
+	"version": "3.0.1",
 	"main": "index.js",
 	"files": [
 		"index.js",
@@ -27,13 +27,13 @@
 	},
 	"peerDependencies": {
 		"date-fns": "^2.7.0",
-		"luxon": "^2.3.0"
+		"luxon": "^2.3.0 || ^3.0.0"
 	},
 	"devDependencies": {
 		"date-fns": "^2.7.0",
 		"date-fns-tz": "^1.0.8",
 		"eslint": "^8.6.0",
-		"luxon": "^2.3.0",
+		"luxon": "^3.1.1",
 		"syntax-cli": "^0.1.12"
 	},
 	"scripts": {
