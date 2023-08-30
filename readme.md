@@ -8,6 +8,20 @@ Yet another package to **parse human relative time strings like "next Tuesday 3p
 [![support me via GitHub Sponsors](https://img.shields.io/badge/support%20me-donate-fa7664.svg)](https://github.com/sponsors/derhuerst)
 [![chat with me on Twitter](https://img.shields.io/badge/chat%20with%20me-on%20Twitter-1da1f2.svg)](https://twitter.com/derhuerst)
 
+
+## Installation
+
+```shell
+npm install parse-human-relative-time
+```
+
+
+## Usage
+
+When using `luxon`, note that [it currently always follows ISO weekdays (`0` = Monday) instead of the locale](https://github.com/moment/luxon/issues/373).
+
+### [Luxon](https://moment.github.io/luxon/#/) integration
+
 ```js
 const {DateTime} = require('luxon')
 const parseHumanRelativeTime = require('parse-human-relative-time')(DateTime)
@@ -20,18 +34,6 @@ parseHumanRelativeTime('in 2 minutes', dt)
 .toISO({suppressSeconds: true, suppressMilliseconds: true})
 // 2019-03-31T03:01+02:00
 ```
-
-
-## Installation
-
-```shell
-npm install parse-human-relative-time
-```
-
-
-## Usage
-
-When using `luxon`, note that [it currently always follows ISO weekdays (`0` = Monday) instead of the locale](https://github.com/moment/luxon/issues/373).
 
 ### [`date-fns`](https://date-fns.org) integration
 
