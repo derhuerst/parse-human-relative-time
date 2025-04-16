@@ -4,13 +4,13 @@ import {TZDate} from '@date-fns/tz'
 import {DateTime} from 'luxon'
 import {
 	lexHumanRelativeTime as lex,
-} from './lex.js'
+} from './index.js'
 import {
 	createParseHumanRelativeTime as createParseHumanRelativeTimeWithDateFns,
 } from './date-fns.js'
 import {
 	createParseHumanRelativeTime as createParseHumanRelativeTimeWithLuxon,
-} from './index.js'
+} from './luxon.js'
 
 const parseWithDateFns = createParseHumanRelativeTimeWithDateFns(dateFns)
 const parseWithLuxon = createParseHumanRelativeTimeWithLuxon(DateTime)

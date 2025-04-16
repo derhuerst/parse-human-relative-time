@@ -23,7 +23,7 @@ When using `luxon`, note that [it currently always follows ISO weekdays (`0` = M
 ### [Luxon](https://moment.github.io/luxon/#/) integration
 
 ```js
-import {createParseHumanRelativeTime} from 'parse-human-relative-time'
+import {createParseHumanRelativeTime} from 'parse-human-relative-time/luxon.js'
 import {DateTime} from 'luxon'
 const parseHumanRelativeTime = createParseHumanRelativeTime(DateTime)
 
@@ -56,7 +56,7 @@ dateFns.format(withDST, 'HH:mm zz')
 ### Lexing into instructions
 
 ```js
-import {lexHumanRelativeTime} from 'parse-human-relative-time/lex.js'
+import {lexHumanRelativeTime} from 'parse-human-relative-time'
 
 lexHumanRelativeTime('next tuesday 5pm')
 ```

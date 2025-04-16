@@ -3,7 +3,7 @@ import {TZDate} from '@date-fns/tz'
 import {DateTime} from 'luxon'
 import {
 	createParseHumanRelativeTime as createParseHumanRelativeTimeWithLuxon,
-} from './index.js'
+} from './luxon.js'
 import {
 	createParseHumanRelativeTime as createParseHumanRelativeTimeWithDateFns,
 } from './date-fns.js'
