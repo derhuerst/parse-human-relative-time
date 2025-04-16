@@ -1,7 +1,7 @@
 {
 	"name": "parse-human-relative-time",
 	"description": "Parse human relative time strings like \"next Tuesday 3pm\".",
-	"version": "3.0.4",
+	"version": "4.0.0",
 	"type": "module",
 	"main": "parse.js",
 	"files": [

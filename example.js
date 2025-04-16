@@ -11,7 +11,7 @@ import {
 const parseWithLuxon = createParseHumanRelativeTimeWithLuxon(DateTime)
 const parseWithDateFns = createParseHumanRelativeTimeWithDateFns(dateFns)
 
-// Europe/Berlin switched to DST at 31st of March at 2am.
+// Europe/Berlin switched to DST on the 31st of March at 2am.
 const withoutDST = '2019-03-31T01:59+01:00'
 const timeZone = 'Europe/Berlin'
 const rel = 'in 2 minutes'

@@ -27,7 +27,7 @@ import {createParseHumanRelativeTime} from 'parse-human-relative-time/luxon.js'
 import {DateTime} from 'luxon'
 const parseHumanRelativeTime = createParseHumanRelativeTime(DateTime)
 
-// Europe/Berlin switched to DST at 31st of March at 2am.
+// Europe/Berlin switched to DST on the 31st of March at 2am.
 const tz = 'Europe/Berlin'
 const dt = DateTime.fromISO('2019-03-31T01:59+01:00').setZone(tz)
 
@@ -44,7 +44,7 @@ import {createParseHumanRelativeTime} from 'parse-human-relative-time/date-fns.j
 import * as dateFns from 'date-fns'
 const parseHumanRelativeTime = createParseHumanRelativeTime(dateFns)
 
-// Europe/Berlin switched to DST at 31st of March at 2am.
+// Europe/Berlin switched to DST on the 31st of March at 2am.
 const timeZone = 'Europe/Berlin'
 const withoutDST = new TZDate('2019-03-31T01:59+01:00', {timeZone})
 

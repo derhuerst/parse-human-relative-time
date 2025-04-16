@@ -201,7 +201,7 @@ for (const [relative, instructions, iso] of tests) {
 
 	eql(parseHumanRelativeTime(relative), instructions)
 
-	const d = DateTime.fromISO(now).setZone('Europe/Berlin')
+	const d = DateTime.fromISO(now).setZone(timeZone)
 	const d2 = parseWithLuxon(relative, d)
 	const actual = d2.toISO({suppressMilliseconds: true})
 	try {
