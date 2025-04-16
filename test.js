@@ -3,8 +3,8 @@ import * as dateFns from 'date-fns'
 import {TZDate} from '@date-fns/tz'
 import {DateTime} from 'luxon'
 import {
-	lexHumanRelativeTime as lex,
-} from './index.js'
+	parseHumanRelativeTime,
+} from './parse.js'
 import {
 	createParseHumanRelativeTime as createParseHumanRelativeTimeWithDateFns,
 } from './date-fns.js'
@@ -199,9 +199,7 @@ const tests = [
 for (const [relative, instructions, iso] of tests) {
 	console.info(relative)
 
-	eql(lex(relative), instructions)
-
-	// todo: test `parse` once https://github.com/marnusw/date-fns-tz/issues/31 is fixed
+	eql(parseHumanRelativeTime(relative), instructions)
 
 	const d = DateTime.fromISO(now).setZone('Europe/Berlin')
 	const d2 = parseWithLuxon(relative, d)

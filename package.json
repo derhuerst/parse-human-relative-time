@@ -3,12 +3,12 @@
 	"description": "Parse human relative time strings like \"next Tuesday 3pm\".",
 	"version": "3.0.4",
 	"type": "module",
-	"main": "lex.js",
+	"main": "parse.js",
 	"files": [
 		"luxon.js",
 		"date-fns.js",
+		"parse.js",
 		"parser.cjs",
-		"lex.js",
 		"example.js"
 	],
 	"keywords": [

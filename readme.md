@@ -56,9 +56,9 @@ dateFns.format(withDST, 'HH:mm zz')
 ### Lexing into instructions
 
 ```js
-import {lexHumanRelativeTime} from 'parse-human-relative-time'
+import {parseHumanRelativeTime} from 'parse-human-relative-time'
 
-lexHumanRelativeTime('next tuesday 5pm')
+parseHumanRelativeTime('next tuesday 5pm')
 ```
 
 ```js

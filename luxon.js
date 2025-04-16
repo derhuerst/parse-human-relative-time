@@ -1,4 +1,4 @@
-import {lexHumanRelativeTime} from './lex.js'
+import {parseHumanRelativeTime as _parse} from './parse.js'
 
 const cmds = new Map([
 	['addMilliseconds', (dt, ms) => dt.plus({milliseconds: ms})],
@@ -34,7 +34,7 @@ const cmds = new Map([
 
 const createParseHumanRelativeTime = (DateTime) => {
 	const parseHumanRelativeTime = (str, now = DateTime.local()) => {
-		const instructions = lexHumanRelativeTime(str)
+		const instructions = _parse(str)
 		let res = now
 		for (const [cmd, ...args] of instructions) {
 			if (!cmds.has(cmd)) {
