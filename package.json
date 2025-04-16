@@ -23,7 +23,7 @@
 	"bugs": "https://github.com/derhuerst/parse-human-relative-time/issues",
 	"license": "ISC",
 	"engines": {
-		"node": ">=16"
+		"node": ">=22"
 	},
 	"peerDependencies": {
 		"date-fns": "^2.7.0 || ^3",
