@@ -18,13 +18,13 @@ const now = '2019-03-31T01:59:00+01:00'
 
 const tests = [
 	['12am', [
-		['setHours', 0],
+		resetHours,
 		resetMinutes,
 		resetSeconds,
 		resetMilliseconds
 	], '2019-03-31T00:00:00+01:00'],
 	['12:01am', [
-		['setHours', 0],
+		resetHours,
 		['setMinutes', 1],
 		resetSeconds,
 		resetMilliseconds
