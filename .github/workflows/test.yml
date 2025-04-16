@@ -37,3 +37,9 @@ jobs:
         set -eux -o pipefail
         npm i date-fns@3 date-fns-tz@3 -D
         npm test
+
+    - name: npm test with luxon@2
+      run: |
+        set -eux -o pipefail
+        npm i luxon@2 -D
+        npm test
