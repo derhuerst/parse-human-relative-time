@@ -1,10 +1,8 @@
-'use strict'
+import {lexHumanRelativeTime} from './lex.js'
 
-const lex = require('./lex')
-
-const createParse = (dateFns) => {
+const createParseHumanRelativeTime = (dateFns) => {
 	const parseHumanRelativeTime = (str, now = new Date()) => {
-		const instructions = lex(str)
+		const instructions = lexHumanRelativeTime(str)
 		let res = now
 		for (const [cmd, ...args] of instructions) {
 			if ('function' !== typeof dateFns[cmd]) {
@@ -23,4 +21,6 @@ const createParse = (dateFns) => {
 	return parseHumanRelativeTime
 }
 
-module.exports = createParse
+export {
+	createParseHumanRelativeTime,
+}

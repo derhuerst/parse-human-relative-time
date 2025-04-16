@@ -1,6 +1,4 @@
-'use strict'
-
-const lex = require('./lex')
+import {lexHumanRelativeTime} from './lex.js'
 
 const cmds = new Map([
 	['addMilliseconds', (dt, ms) => dt.plus({milliseconds: ms})],
@@ -34,9 +32,9 @@ const cmds = new Map([
 	['endOfWeek', dt => dt.endOf('week')]
 ])
 
-const createParse = (DateTime) => {
+const createParseHumanRelativeTime = (DateTime) => {
 	const parseHumanRelativeTime = (str, now = DateTime.local()) => {
-		const instructions = lex(str)
+		const instructions = lexHumanRelativeTime(str)
 		let res = now
 		for (const [cmd, ...args] of instructions) {
 			if (!cmds.has(cmd)) {
@@ -55,4 +53,6 @@ const createParse = (DateTime) => {
 	return parseHumanRelativeTime
 }
 
-module.exports = createParse
+export {
+	createParseHumanRelativeTime,
+}

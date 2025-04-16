@@ -1,12 +1,19 @@
-'use strict'
+import {deepStrictEqual as eql} from 'node:assert'
+import {toDate} from 'date-fns-tz'
+import dateFns from 'date-fns'
+import {DateTime} from 'luxon'
+import {
+	lexHumanRelativeTime as lex,
+} from './lex.js'
+import {
+	createParseHumanRelativeTime as createParseHumanRelativeTimeWithDateFns,
+} from './date-fns.js'
+import {
+	createParseHumanRelativeTime as createParseHumanRelativeTimeWithLuxon,
+} from './index.js'
 
-const {deepStrictEqual: eql} = require('assert')
-const {toDate} = require('date-fns-tz')
-const dateFns = require('date-fns')
-const {DateTime} = require('luxon')
-const lex = require('./lex')
-const parse = require('./date-fns')(dateFns)
-const parseWithLuxon = require('.')(DateTime)
+const parseWithDateFns = createParseHumanRelativeTimeWithDateFns(dateFns)
+const parseWithLuxon = createParseHumanRelativeTimeWithLuxon(DateTime)
 
 const resetHours = ['setHours', 0]
 const resetMinutes = ['setMinutes', 0]
@@ -217,7 +224,7 @@ for (const [relative, instructions, iso] of tests) {
 //   .toISO()
 //   -> 2019-03-31T03:01+02:00
 const d = toDate('2019-03-31T01:59+01:00', {timeZone})
-const d2 = parse('in 2 minutes', d)
+const d2 = parseWithDateFns('in 2 minutes', d)
 eql(d2.toISOString(), '2019-03-31T01:01:00.000Z')
 
 

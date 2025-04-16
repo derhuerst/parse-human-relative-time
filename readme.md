@@ -23,8 +23,9 @@ When using `luxon`, note that [it currently always follows ISO weekdays (`0` = M
 ### [Luxon](https://moment.github.io/luxon/#/) integration
 
 ```js
-const {DateTime} = require('luxon')
-const parseHumanRelativeTime = require('parse-human-relative-time')(DateTime)
+import {createParseHumanRelativeTime} from 'parse-human-relative-time'
+import {DateTime} from 'luxon'
+const parseHumanRelativeTime = createParseHumanRelativeTime(DateTime)
 
 // Europe/Berlin switched to DST at 31st of March at 2am.
 const tz = 'Europe/Berlin'
@@ -38,15 +39,16 @@ parseHumanRelativeTime('in 2 minutes', dt)
 ### [`date-fns`](https://date-fns.org) integration
 
 ```js
-const dateFns = require('date-fns')
-const parseHumanRelative = require('parse-human-relative-time/date-fns')(dateFns)
-const {format} = require('date-fns-tz')
+import {createParseHumanRelativeTime} from 'parse-human-relative-time/date-fns.js'
+import dateFns from 'date-fns'
+import {format} from 'date-fns-tz'
+const parseHumanRelativeTime = createParseHumanRelativeTime(dateFns)
 
 // Europe/Berlin switched to DST at 31st of March at 2am.
 const withoutDST = new Date('2019-03-31T01:59+01:00')
 const timeZone = 'Europe/Berlin'
 
-const withDST = parseHumanRelative('in 2 minutes', withoutDST)
+const withDST = parseHumanRelativeTime('in 2 minutes', withoutDST)
 format(withDST, 'HH:mm zz', {timeZone})
 // 03:01 GMT+2
 ````
@@ -54,7 +56,7 @@ format(withDST, 'HH:mm zz', {timeZone})
 ### Lexing into instructions
 
 ```js
-const lexHumanRelativeTime = require('parse-human-relative-time/lex')
+import {lexHumanRelativeTime} from 'parse-human-relative-time/lex.js'
 
 lexHumanRelativeTime('next tuesday 5pm')
 ```
@@ -77,7 +79,7 @@ lexHumanRelativeTime('next tuesday 5pm')
 
 ## Why yet another package?
 
-**Other packages don't handle time zones correctly**, because they
+**Most other packages don't handle time zones correctly**, because they
 
 - mess up timezones (e.g. [`parse-messy-time`](https://github.com/substack/parse-messy-time)),
 - parse to relative milliseconds, in some [DST](https://en.wikipedia.org/wiki/Daylight_saving_time) cases (e.g. [`parse-relative-time`](https://github.com/fczbkk/parse-relative-time) & [`timestring`](https://github.com/mike182uk/timestring)),

@@ -1,7 +1,7 @@
-'use strict'
-
-const parser = require('./parser')
+import parser from './parser.cjs'
 
 const lexHumanRelativeTime = str => parser.parse(str)
 
-module.exports = lexHumanRelativeTime
+export {
+	lexHumanRelativeTime,
+}

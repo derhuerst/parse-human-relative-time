@@ -1,10 +1,15 @@
-'use strict'
+import dateFns from 'date-fns'
+import {format} from 'date-fns-tz'
+import {DateTime} from 'luxon'
+import {
+	createParseHumanRelativeTime as createParseHumanRelativeTimeWithLuxon,
+} from './index.js'
+import {
+	createParseHumanRelativeTime as createParseHumanRelativeTimeWithDateFns,
+} from './date-fns.js'
 
-const {DateTime} = require('luxon')
-const dateFns = require('date-fns')
-const {format} = require('date-fns-tz')
-const parseWithLuxon = require('.')(DateTime)
-const parseWithDateFns = require('./date-fns')(dateFns)
+const parseWithLuxon = createParseHumanRelativeTimeWithLuxon(DateTime)
+const parseWithDateFns = createParseHumanRelativeTimeWithDateFns(dateFns)
 
 // Europe/Berlin switched to DST at 31st of March at 2am.
 const withoutDST = '2019-03-31T01:59+01:00'
