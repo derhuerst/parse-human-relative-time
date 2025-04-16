@@ -1,5 +1,5 @@
-import dateFns from 'date-fns'
-import {format} from 'date-fns-tz'
+import * as dateFns from 'date-fns'
+import {TZDate} from '@date-fns/tz'
 import {DateTime} from 'luxon'
 import {
 	createParseHumanRelativeTime as createParseHumanRelativeTimeWithLuxon,
@@ -21,6 +21,6 @@ const withDST1 = parseWithLuxon(rel, dt)
 console.log(withDST1.toFormat('HH:mm ZZZZ'))
 // 03:01 GMT+2
 
-const withDST2 = parseWithDateFns(rel, new Date(withoutDST))
-console.log(format(withDST2, 'HH:mm zz', {timeZone: 'Europe/Berlin'}))
+const withDST2 = parseWithDateFns(rel, new TZDate(withoutDST, {timeZone: 'Europe/Berlin'}))
+console.log(dateFns.format(withDST2, 'HH:mm zz'))
 // 03:01 GMT+2

@@ -39,17 +39,17 @@ parseHumanRelativeTime('in 2 minutes', dt)
 ### [`date-fns`](https://date-fns.org) integration
 
 ```js
+import {TZDate} from 'date-fns-tz'
 import {createParseHumanRelativeTime} from 'parse-human-relative-time/date-fns.js'
-import dateFns from 'date-fns'
-import {format} from 'date-fns-tz'
+import * as dateFns from 'date-fns'
 const parseHumanRelativeTime = createParseHumanRelativeTime(dateFns)
 
 // Europe/Berlin switched to DST at 31st of March at 2am.
-const withoutDST = new Date('2019-03-31T01:59+01:00')
 const timeZone = 'Europe/Berlin'
+const withoutDST = new TZDate('2019-03-31T01:59+01:00', {timeZone})
 
 const withDST = parseHumanRelativeTime('in 2 minutes', withoutDST)
-format(withDST, 'HH:mm zz', {timeZone})
+dateFns.format(withDST, 'HH:mm zz')
 // 03:01 GMT+2
 ````
 

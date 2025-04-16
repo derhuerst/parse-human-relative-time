@@ -27,13 +27,13 @@
 		"node": ">=22"
 	},
 	"peerDependencies": {
-		"date-fns": "^2.7.0 || ^3",
-		"luxon": "^2.3.0 || ^3.0.0"
+		"date-fns": "^4.1.0",
+		"luxon": "^3.0.0"
 	},
 	"devDependencies": {
+		"@date-fns/tz": "^1.2.0",
 		"@eslint/compat": "^1.2.8",
-		"date-fns": "^2.7.0",
-		"date-fns-tz": "^2.0.0",
+		"date-fns": "^4.1.0",
 		"eslint": "^9.24.0",
 		"luxon": "^3.1.1",
 		"syntax-cli": "^0.1.12"

@@ -1,6 +1,6 @@
 import {deepStrictEqual as eql} from 'node:assert'
-import {toDate} from 'date-fns-tz'
-import dateFns from 'date-fns'
+import * as dateFns from 'date-fns'
+import {TZDate} from '@date-fns/tz'
 import {DateTime} from 'luxon'
 import {
 	lexHumanRelativeTime as lex,
@@ -216,16 +216,9 @@ for (const [relative, instructions, iso] of tests) {
 
 
 // 01:00 in Europe/Berlin: switch non-DST -> DST
-//   require('luxon')
-//   .DateTime
-//   .fromISO('2019-03-31T01:59+01:00')
-//   .setZone('Europe/Berlin')
-//   .plus({minutes: 2})
-//   .toISO()
-//   -> 2019-03-31T03:01+02:00
-const d = toDate('2019-03-31T01:59+01:00', {timeZone})
+const d = new TZDate('2019-03-31T01:59+01:00', timeZone)
 const d2 = parseWithDateFns('in 2 minutes', d)
-eql(d2.toISOString(), '2019-03-31T01:01:00.000Z')
+eql(d2.toISOString(), '2019-03-31T03:01:00.000+02:00')
 
 
 console.info('\nTests successful. ✔︎')
